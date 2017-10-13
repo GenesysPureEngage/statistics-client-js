@@ -1,2 +1,2 @@
-# statistics-client-js
-A Statistics API client library for Node.js 
+# statistics-lib-js
+A Javascript wrapper around the Statistics API
