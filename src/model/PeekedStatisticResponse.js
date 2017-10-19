@@ -16,32 +16,32 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/ApiResponse', 'model/ApiResponseStatus'], factory);
+    define(['ApiClient', 'model/ApiResponse', 'model/ApiResponseStatus', 'model/PeekedStatistic'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./ApiResponse'), require('./ApiResponseStatus'));
+    module.exports = factory(require('../ApiClient'), require('./ApiResponse'), require('./ApiResponseStatus'), require('./PeekedStatistic'));
   } else {
     // Browser globals (root is window)
     if (!root.StatisticsService) {
       root.StatisticsService = {};
     }
-    root.StatisticsService.ApiResponse = factory(root.StatisticsService.ApiClient, root.StatisticsService.ApiResponse, root.StatisticsService.ApiResponseStatus);
+    root.StatisticsService.PeekedStatisticResponse = factory(root.StatisticsService.ApiClient, root.StatisticsService.ApiResponse, root.StatisticsService.ApiResponseStatus, root.StatisticsService.PeekedStatistic);
   }
-}(this, function(ApiClient, ApiResponse, ApiResponseStatus) {
+}(this, function(ApiClient, ApiResponse, ApiResponseStatus, PeekedStatistic) {
   'use strict';
 
 
 
 
   /**
-   * The ApiResponse model module.
-   * @module model/ApiResponse
+   * The PeekedStatisticResponse model module.
+   * @module model/PeekedStatisticResponse
    * @version 9.0.000.00.dev
    */
 
   /**
-   * Constructs a new <code>ApiResponse</code>.
-   * @alias module:model/ApiResponse
+   * Constructs a new <code>PeekedStatisticResponse</code>.
+   * @alias module:model/PeekedStatisticResponse
    * @class
    * @param status {module:model/ApiResponseStatus} 
    */
@@ -55,18 +55,18 @@
   };
 
   /**
-   * Constructs a <code>ApiResponse</code> from a plain JavaScript object, optionally creating a new instance.
+   * Constructs a <code>PeekedStatisticResponse</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/ApiResponse} obj Optional instance to populate.
-   * @return {module:model/ApiResponse} The populated <code>ApiResponse</code> instance.
+   * @param {module:model/PeekedStatisticResponse} obj Optional instance to populate.
+   * @return {module:model/PeekedStatisticResponse} The populated <code>PeekedStatisticResponse</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
       obj = obj || new exports();
 
       if (data.hasOwnProperty('data')) {
-        obj['data'] = ApiClient.convertToType(data['data'], Object);
+        obj['data'] = PeekedStatistic.constructFromObject(data['data']);
       }
       if (data.hasOwnProperty('errors')) {
         obj['errors'] = ApiClient.convertToType(data['errors'], [ApiResponse]);
@@ -82,7 +82,7 @@
   }
 
   /**
-   * @member {Object} data
+   * @member {module:model/PeekedStatistic} data
    */
   exports.prototype['data'] = undefined;
   /**
