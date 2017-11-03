@@ -18,7 +18,12 @@
     "url": "git://github.com/GenesysPureEngage/statistics-client-js.git"
   },
   "dependencies": {
-    "superagent": "1.7.1"
+    "cometd": "^3.1.2",
+    "cometd-nodejs-client": "^1.0.1",
+    "cookiejar": "2.1.1",
+    "events": "^1.1.1",
+    "superagent": "1.7.1",
+    "winston": "2.4.0"
   },
   "devDependencies": {
     "mocha": "~2.3.4",
