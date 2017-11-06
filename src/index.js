@@ -22,7 +22,7 @@ class Statistics extends EventEmitter {
         this.client = client;
         
         this.api = new internal.StatisticsApi(client);
-        this.cookieStore = client.agent.jar;
+        this.cookieJar = client.agent.jar;
         this.notifications = new Notifications(apiKey, `${apiUrl}/notifications`);
     }
     
@@ -45,10 +45,10 @@ class Statistics extends EventEmitter {
         this.notifications.on(serviceChannel, data => this.emit('ServiceChange', data));
         this.notifications.on(valuesChannel, data => this.emit('Values', data));
         
-        return this.notifications.initialize(token, channels, this.cookieStore).then(() => this);
+        return this.notifications.initialize(token, channels, this.cookieJar).then(() => this);
     }
     
-    deleteSubsciption(id) {
+    deleteSubscription(id) {
         return this.api.deleteSubscription(id);
     }
     

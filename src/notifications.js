@@ -4,7 +4,7 @@ const logger = require('winston');
 
 const CookieJar = require('cookiejar').CookieJar;
 const cometDLib = require('cometd');
-require('cometd-nodejs-client').adapt();
+require('./cometd-nodejs-client').adapt();
 
 class Notifications extends EventEmitter {
     constructor(apiKey, endpointUrl) {
@@ -15,7 +15,7 @@ class Notifications extends EventEmitter {
         this.cometd = new cometDLib.CometD();
     }
     
-    initialize(token, channels = [], cookieStore = new CookieJar()) {
+    initialize(token, channels = [], cookieJar = new CookieJar()) {
         const cometd = this.cometd;
         logger.debug(`Initializing (token: ${token}, channels: ${channels})`);
         
@@ -23,7 +23,7 @@ class Notifications extends EventEmitter {
             const hostname = url.parse(this.endpointUrl).hostname;
             const transport = cometd.findTransport('long-polling');
             transport.context = {
-                cookieStore: cookieStore
+                cookieJar: cookieJar
             };
 
             cometd.configure({
