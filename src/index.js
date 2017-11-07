@@ -36,7 +36,7 @@ class Statistics extends EventEmitter {
         };
         
         const serviceChannel = '/statistics/v3/service';
-        const valuesChannel = '/statistics/v3/values';
+        const valuesChannel = '/statistics/v3/updates';
         const channels = [
           serviceChannel,
           valuesChannel
