@@ -7,12 +7,15 @@ const Notifications = require('./notifications');
 const internal = require('./internal');
 
 class Statistics extends EventEmitter {
-    
+
     constructor(apiKey, baseUrl) {
         super();
         
         const apiUrl = `${baseUrl}/statistics/v3`;
-        
+
+        this.SERVICE_CHANGE_EVENT = "ServiceChange";
+        this.UPDATES_EVENT = "Updates";
+
         this.apiKey = apiKey;
         this.apiUrl = apiUrl;        
 
@@ -35,15 +38,16 @@ class Statistics extends EventEmitter {
             Authorization: `Bearer ${token}`
         };
         
-        const serviceChannel = '/statistics/v3/service';
-        const valuesChannel = '/statistics/v3/updates';
+        const serviceChannel = "/statistics/v3/service";
+        const updatesChannel = "/statistics/v3/updates";
         const channels = [
           serviceChannel,
-          valuesChannel
+          updatesChannel
         ];
 
-        this.notifications.on(serviceChannel, data => this.emit('ServiceChange', data));
-        this.notifications.on(valuesChannel, data => this.emit('Values', data));
+        // emit events, to subscribe them use events.on(EVENT_NAME, (data) => {});
+        this.notifications.on(serviceChannel, data => this.emit(this.SERVICE_CHANGE_EVENT, data));
+        this.notifications.on(updatesChannel, data => this.emit(this.UPDATES_EVENT, data));
         
         return this.notifications.initialize(token, channels, this.cookieJar).then(() => this);
     }
