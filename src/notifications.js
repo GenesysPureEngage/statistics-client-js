@@ -15,7 +15,7 @@ class Notifications extends EventEmitter {
         this.cometd = new cometDLib.CometD();
     }
     
-    initialize(token, channels = [], cookieJar = new CookieJar()) {
+    initialize(token, channels = [], cookieJar = new CookieJar(), cometdConfiguration = {}) {
         const cometd = this.cometd;
         logger.debug(`Initializing (token: ${token}, channels: ${channels})`);
         
@@ -26,6 +26,7 @@ class Notifications extends EventEmitter {
                 cookieJar: cookieJar
             };
 
+            // Set default headers
             cometd.configure({
                 url: this.endpointUrl,
                 requestHeaders: {
@@ -34,6 +35,10 @@ class Notifications extends EventEmitter {
                 }
             });
 
+            // Apply user defined configuration
+            if (cometdConfiguration && Object.keys(cometdConfiguration).length !== 0) {
+                cometd.configure(cometdConfiguration);
+            }
             cometd.handshake(reply => {
                 if(reply.successful) {
                     logger.debug('Handshake successful');

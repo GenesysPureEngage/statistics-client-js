@@ -30,7 +30,7 @@ class Statistics extends EventEmitter {
     }
     
     
-    initialize(token) {
+    initialize(token, cometdConfiguration = {}) {
         logger.debug(`Initializing: ${token}`);
         
         this.client.defaultHeaders = {
@@ -49,7 +49,7 @@ class Statistics extends EventEmitter {
         this.notifications.on(serviceChannel, data => this.emit(this.SERVICE_CHANGE_EVENT, data));
         this.notifications.on(updatesChannel, data => this.emit(this.UPDATES_EVENT, data));
         
-        return this.notifications.initialize(token, channels, this.cookieJar).then(() => this);
+        return this.notifications.initialize(token, channels, this.cookieJar, cometdConfiguration).then(() => this);
     }
     
     deleteSubscription(id) {
