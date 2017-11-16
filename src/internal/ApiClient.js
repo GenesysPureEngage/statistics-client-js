@@ -49,15 +49,16 @@ const CookieJar = require('cookiejar').CookieJar;
     /**
      * The base URL against which to resolve every API call's (relative) path.
      * @type {String}
-     * @default https://gws-usw1.genhtcc.com/statistics/v3
+     * @default http://gws-usw1.genhtcc.com/statistics/v3
      */
-    this.basePath = 'https://gws-usw1.genhtcc.com/statistics/v3'.replace(/\/+$/, '');
+    this.basePath = 'http://gws-usw1.genhtcc.com/statistics/v3'.replace(/\/+$/, '');
 
     /**
      * The authentication methods to be included for all API calls.
      * @type {Array.<String>}
      */
     this.authentications = {
+      'Authorization': {type: 'apiKey', 'in': 'header', name: 'Authorization'}
     };
     /**
      * The default HTTP headers to be included for all API calls.
