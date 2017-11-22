@@ -1,6 +1,6 @@
 {
   "name": "genesys-statistics-client-js",
-  "version": "1.0.88",
+  "version": "1.0.89",
   "description": "Statistics Service API",
   "license": "MIT",
   "main": "src/index.js",
