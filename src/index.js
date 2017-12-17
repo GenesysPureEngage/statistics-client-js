@@ -30,6 +30,13 @@ class Statistics extends EventEmitter {
     }
     
     
+    /**
+     *  Initialize client
+     * 
+     * @param {string} token Bearer Authorization token
+     * @param {object} cometdConfiguration
+     * @returns {Promise}
+     */
     initialize(token, cometdConfiguration = {}) {
         logger.debug(`Initializing: ${token}`);
         
@@ -52,10 +59,24 @@ class Statistics extends EventEmitter {
         return this.notifications.initialize(token, channels, this.cookieJar, cometdConfiguration).then(() => this);
     }
     
+    /**
+     *  Delete the specified subscription by closing all its statistics.
+     * 
+     * @param {string} id
+     * @returns {Promise}
+     */
     deleteSubscription(id) {
         return this.api.deleteSubscription(id);
     }
     
+    /**
+     *  Open a subscription for the specified set of statistics.
+     * 
+     * @param {string} operationId
+     * @param {object[]} descriptors
+     * @param {boolean} verbose
+     * @returns {Promise}
+     */
     createSubscription(operationId, descriptors = [], verbose = true) {
         const statistics = {
             operationId: operationId,
@@ -71,6 +92,14 @@ class Statistics extends EventEmitter {
         return this.api.createSubscriptionUsingPOST(statistics, opts);
     }
     
+    /**
+     *  Get the values of a set of statistics that was opened with a subscription.
+     * 
+     * @param {string} id 
+     * @param {string[]} statisticIds list of statistic IDs that belong to the specified subscription. If omitted, the Statistics API returns the current values of all statistics opened within the subscription. If specified, the Statistics API returns values for the statistics with the specified IDs.
+     * @param {boolean} verbose
+     * @returns {Promise}
+     */
     peekSubscriptionStats(id, statisticIds = [], verbose = true) {
         const opts = {
             statisticIds: statisticIds,
@@ -79,10 +108,24 @@ class Statistics extends EventEmitter {
         return this.api.peekSubscriptionStats(id, opts);
     }
     
+    /**
+     *  Get the current value of a statistic from Stat Server.
+     * 
+     * @param {string} name The name of the pre-configured statistic to retrieve.
+     * @param {string} objectId The ID of the object.
+     * @param {string} objectType The type of object the statistic is for.
+     * @returns {Promise}
+     */
     getStatValue(name, objectId, objectType) {
         return this.api.getStatValue(name, objectId, objectType);
     }
     
+    /**
+     *  Get the current value of predefined statistics from Stat Server without a subscription.
+     * 
+     * @param {object[]} infos The set of statistics you want to get the values for from Stat Server.
+     * @returns {Promise}
+     */
     getStatValues(infos = []) {
         const statistics = {
             data: {
