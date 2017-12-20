@@ -89,7 +89,7 @@ class Statistics extends EventEmitter {
             verbose: verbose? 'INFO': 'OFF'
         };
         
-        return this.api.createSubscriptionUsingPOST(statistics, opts);
+        return this.api.createSubscription(statistics, opts);
     }
     
     /**
