@@ -31,9 +31,9 @@ class Statistics extends EventEmitter {
     
     
     /**
-     *  Initialize client
+     *  Initialize the Statistics client library.
      * 
-     * @param {string} token Bearer Authorization token
+     * @param {string} token The authorization token you received during authentication by following the Authorization Code Grant flow.
      * @param {object} cometdConfiguration
      * @returns {Promise}
      */
@@ -62,7 +62,7 @@ class Statistics extends EventEmitter {
     /**
      *  Delete the specified subscription by closing all its statistics.
      * 
-     * @param {string} id
+     * @param {string} id The ID of the subscription to delete.
      * @returns {Promise}
      */
     deleteSubscription(id) {
@@ -72,9 +72,9 @@ class Statistics extends EventEmitter {
     /**
      *  Open a subscription for the specified set of statistics.
      * 
-     * @param {string} operationId
-     * @param {object[]} descriptors
-     * @param {boolean} verbose
+     * @param {string} operationId A unique string (we recommend using a UUID/GUID) that the Statistics API uses as the subscriptionId.
+     * @param {object[]} descriptors Definitions of the statistics to be monitored.
+     * @param {boolean} verbose Specifies whether the Statistics API should return additional information about opened statistics in the response.
      * @returns {Promise}
      */
     createSubscription(operationId, descriptors = [], verbose = true) {
@@ -93,10 +93,10 @@ class Statistics extends EventEmitter {
     }
     
     /**
-     *  Get the values of a set of statistics that was opened with a subscription.
+     *  Get the value of a set of statistics that was opened with a subscription.
      * 
-     * @param {string} id 
-     * @param {string[]} statisticIds list of statistic IDs that belong to the specified subscription. If omitted, the Statistics API returns the current values of all statistics opened within the subscription. If specified, the Statistics API returns values for the statistics with the specified IDs.
+     * @param {string} id The ID of the subscription.
+     * @param {string[]} statisticIds A list of statistic IDs that belong to the specified subscription. If omitted, the Statistics API returns the current values of all statistics opened within the subscription. If specified, the Statistics API returns values for the statistics with the specified IDs.
      * @param {boolean} verbose
      * @returns {Promise}
      */
