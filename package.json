@@ -22,12 +22,12 @@
     "cometd-nodejs-client": "^1.0.1",
     "cookiejar": "2.1.1",
     "events": "^1.1.1",
-    "superagent": "1.7.1",
+    "superagent": "^3.7.0",
     "winston": "2.4.0"
   },
   "devDependencies": {
-    "mocha": "~2.3.4",
-    "sinon": "1.17.3",
+    "mocha": "^5.2.0",
+    "sinon": "^7.2.2",
     "expect.js": "~0.3.1"
   },
   "engines": {
