@@ -115,7 +115,7 @@ class Statistics extends EventEmitter {
      * @returns {Promise}
      */
     getStatValue(name, objectId, objectType) {
-        return this.api.getStatValue(name, objectId, objectType);
+        return this.api.getStatValue(objectId, objectType, name);
     }
 
     /**
