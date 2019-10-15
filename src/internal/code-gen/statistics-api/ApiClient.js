@@ -33,6 +33,10 @@ const CookieJar = require('cookiejar').CookieJar;
 }(this, function(superagent, querystring) {
   'use strict';
 
+  // extend with Request#proxy()
+  require('superagent-proxy')(superagent);
+ 
+
   /**
    * @module ApiClient
    * @version 9.0.000.37.635
@@ -100,6 +104,11 @@ const CookieJar = require('cookiejar').CookieJar;
      * Allow user to override superagent agent
      */
     this.requestAgent = null;
+	
+    /*
+     * Allow to specify proxy server
+     */
+     this.proxy = null;	
   };
 
   /**
@@ -377,6 +386,11 @@ const CookieJar = require('cookiejar').CookieJar;
     var url = this.buildUrl(path, pathParams);
     var request = superagent(httpMethod, url);
 
+    // set proxy if specified
+    if (this.proxy) {
+      request.proxy(this.proxy);
+    }
+
     // apply authentications
     this.applyAuthToRequest(request, authNames);
 
@@ -398,7 +412,7 @@ const CookieJar = require('cookiejar').CookieJar;
         }
       }
     }
-
+	
     // set query parameters
     if (httpMethod.toUpperCase() === 'GET' && this.cache === false) {
         queryParams['_'] = new Date().getTime();
