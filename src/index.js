@@ -5,7 +5,11 @@ const Notifications = require('./notifications');
 const internal = require('./internal/code-gen/statistics-api');
 
 class Statistics extends EventEmitter {
-
+    /**
+     * Create a new Statistics object.
+     * @param {String} apiKey The API key used to access the statistics api.
+     * @param {String} baseUrl The URL of the statistics service.
+     */
     constructor(apiKey, baseUrl) {
         super();
 
